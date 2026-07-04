@@ -34,10 +34,15 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
   if (!returnLocation?.trim()) errors.push("返却場所を選択してください。");
   if (errors.length) return Response.json({ errors }, { status: 400 });
 
+  // 重複判定・ソートは文字列比較で行うため、UTC ISO 形式に正規化して
+  // タイムゾーン表記（Z / +09:00 等）の混在を防ぐ
+  const startIso = new Date(startAt).toISOString();
+  const endIso = new Date(endAt).toISOString();
+
   // 自分以外の同じ車の時間帯重複チェック
   const overlap = await db
     .prepare("SELECT COUNT(*) AS n FROM reservations WHERE car_id = ?1 AND start_at < ?3 AND end_at > ?2 AND id != ?4")
-    .bind(carId, startAt, endAt, numId)
+    .bind(carId, startIso, endIso, numId)
     .first<{ n: number }>();
   if (overlap && overlap.n > 0) {
     return Response.json(
@@ -52,7 +57,7 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
        WHERE id = ?1
        RETURNING *`,
     )
-    .bind(numId, userName.trim(), carId, startAt, endAt, returnLocation, (memo ?? "").trim())
+    .bind(numId, userName.trim(), carId, startIso, endIso, returnLocation, (memo ?? "").trim())
     .first<ReservationRow>();
 
   if (!updated) return Response.json({ error: "対象の予約が見つかりません。" }, { status: 404 });
@@ -61,8 +66,8 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
     action: "update",
     carId: carId as CarId,
     userName: userName.trim(),
-    startAt,
-    endAt,
+    startAt: startIso,
+    endAt: endIso,
     returnLocation,
   });
 

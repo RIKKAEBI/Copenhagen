@@ -55,12 +55,17 @@ export async function POST(request: Request) {
   if (!returnLocation?.trim()) errors.push("返却場所を選択してください。");
   if (errors.length) return Response.json({ errors }, { status: 400 });
 
+  // 重複判定・ソートは文字列比較で行うため、UTC ISO 形式に正規化して
+  // タイムゾーン表記（Z / +09:00 等）の混在を防ぐ
+  const startIso = new Date(startAt).toISOString();
+  const endIso = new Date(endAt).toISOString();
+
   // 同じ車の時間帯重複チェック
   const overlap = await db
     .prepare(
       "SELECT COUNT(*) AS n FROM reservations WHERE car_id = ?1 AND start_at < ?3 AND end_at > ?2",
     )
-    .bind(carId, startAt, endAt)
+    .bind(carId, startIso, endIso)
     .first<{ n: number }>();
 
   if (overlap && overlap.n > 0) {
@@ -76,15 +81,15 @@ export async function POST(request: Request) {
        VALUES (?1, ?2, ?3, ?4, ?5, ?6)
        RETURNING *`,
     )
-    .bind(userName.trim(), carId, startAt, endAt, returnLocation, (memo ?? "").trim())
+    .bind(userName.trim(), carId, startIso, endIso, returnLocation, (memo ?? "").trim())
     .first<ReservationRow>();
 
   await logActivity(db, {
     action: "create",
     carId: carId as CarId,
     userName: userName.trim(),
-    startAt,
-    endAt,
+    startAt: startIso,
+    endAt: endIso,
     returnLocation,
   });
 

@@ -3,11 +3,11 @@ import { ServiceWorkerRegister } from "@/components/ServiceWorkerRegister";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "社用車予約",
+  title: "コペンハーゲン",
   description: "社用車の予約システム",
   appleWebApp: {
     capable: true,
-    title: "社用車予約",
+    title: "コペンハーゲン",
     statusBarStyle: "default",
   },
 };

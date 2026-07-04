@@ -2,8 +2,8 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "社用車予約",
-    short_name: "社用車予約",
+    name: "コペンハーゲン",
+    short_name: "コペンハーゲン",
     description: "社用車の予約システム",
     lang: "ja",
     start_url: "/",

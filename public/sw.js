@@ -2,7 +2,7 @@
 // - ビルド済み静的アセット: cache-first（ハッシュ付きで不変のため）
 // - /api/: 常にネットワーク（予約データを古い状態で見せない）
 // - ページ遷移: network-first、オフライン時のみキャッシュへフォールバック
-const CACHE = "copenhagen-v1";
+const CACHE = "copenhagen-v2";
 const CACHE_FIRST = [/^\/_next\/static\//, /^\/icons\//, /\.svg$/];
 
 self.addEventListener("install", () => {

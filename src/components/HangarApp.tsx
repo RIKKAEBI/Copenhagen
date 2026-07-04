@@ -56,8 +56,6 @@ export function HangarApp() {
 
   return (
     <div className="relative min-h-screen overflow-hidden text-black">
-      <div className="scanlines pointer-events-none fixed inset-0 z-0" />
-
       {warning && (
         <div className="relative z-10 flex items-center justify-center gap-1.5 border-b border-amber-500/40 bg-amber-400/15 px-4 py-2 text-center font-mono text-[11px] text-amber-700 sm:px-6">
           <TriangleAlert size={13} /> {warning}

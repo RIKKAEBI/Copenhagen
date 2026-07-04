@@ -89,7 +89,7 @@ export function ReservationCalendar({
     return (
       <div className="hud-frame p-3 sm:p-4">
         <div className="mb-3 font-mono text-[10px] tracking-[0.3em] text-black/40">RESERVATION CALENDAR</div>
-        <div className="grid h-[420px] place-items-center font-mono text-xs tracking-widest text-black/35">
+        <div className="grid h-[490px] place-items-center font-mono text-xs tracking-widest text-black/35">
           LOADING CALENDAR...
         </div>
       </div>
@@ -150,7 +150,7 @@ export function ReservationCalendar({
               type="button"
               onClick={() => onSelectDate(d)}
               title="クリックでこの日を予約"
-              className={`group relative flex min-h-[50px] flex-col gap-0.5 border-b border-r border-black/[0.08] p-1 text-left transition-colors hover:bg-black/[0.05] sm:min-h-[60px] ${
+              className={`group relative flex min-h-[58px] flex-col gap-0.5 border-b border-r border-black/[0.08] p-1 text-left transition-colors hover:bg-black/[0.05] sm:min-h-[72px] ${
                 inMonth ? "" : "opacity-35"
               }`}
               style={isToday ? { background: `${accent}12` } : undefined}

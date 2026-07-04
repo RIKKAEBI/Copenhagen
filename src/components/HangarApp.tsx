@@ -3,10 +3,9 @@
 import { useEffect, useState } from "react";
 import { CARS, type CarId } from "@/lib/cars";
 import type { Reservation } from "@/lib/types";
-import { ReservationsBoard } from "./ReservationsBoard";
 import { ReservationCalendar } from "./ReservationCalendar";
 import { ReservationDialog } from "./ReservationDialog";
-import { VehicleLocations } from "./VehicleLocations";
+import { VehicleStatusBoard } from "./VehicleStatusBoard";
 import { ActivityLog } from "./ActivityLog";
 import { SettingsPanel } from "./SettingsPanel";
 import { TriangleAlert } from "lucide-react";
@@ -65,10 +64,9 @@ export function HangarApp() {
         </div>
       )}
 
-      {/* 予約スケジュール + 車両所在地（横並び）— カレンダーの上 */}
-      <section className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 gap-3 px-3 pt-3 sm:px-6 lg:grid-cols-2">
-        <ReservationsBoard reservations={reservations} onCancel={cancel} />
-        <VehicleLocations reservations={reservations} />
+      {/* 車両ステータス（現在状態 + 次の予約）— カレンダーの上 */}
+      <section className="relative z-10 mx-auto max-w-7xl px-3 pt-3 sm:px-6">
+        <VehicleStatusBoard reservations={reservations} onCancel={cancel} />
       </section>
 
       {/* 予約カレンダー */}

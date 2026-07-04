@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #eef1f6;
+  --background: #ffffff;
   --foreground: #16202b;
 }
 
@@ -12,10 +12,7 @@
 
 html,
 body {
-  background:
-    radial-gradient(1200px 600px at 70% -10%, rgba(61, 169, 255, 0.1), transparent 60%),
-    radial-gradient(900px 500px at 10% 110%, rgba(255, 106, 61, 0.08), transparent 60%),
-    var(--background);
+  background: var(--background);
   color: var(--foreground);
   font-family:
     ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial,

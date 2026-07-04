@@ -56,7 +56,7 @@ async function networkFirst(request) {
     return (
       cached ??
       new Response(
-        '<!doctype html><html lang="ja"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>オフライン</title><body style="font-family:sans-serif;display:grid;place-items:center;min-height:100dvh;margin:0;background:#eef1f6;color:#16202b"><p>オフラインです。接続を確認して再読み込みしてください。</p></body></html>',
+        '<!doctype html><html lang="ja"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>オフライン</title><body style="font-family:sans-serif;display:grid;place-items:center;min-height:100dvh;margin:0;background:#ffffff;color:#16202b"><p>オフラインです。接続を確認して再読み込みしてください。</p></body></html>',
         { status: 503, headers: { "Content-Type": "text/html; charset=utf-8" } },
       )
     );
